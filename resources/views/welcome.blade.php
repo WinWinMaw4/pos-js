@@ -6,6 +6,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    @csrf
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
@@ -16,13 +18,13 @@
             <h1 class="text-center">MMS Web POS</h1>
             <div class="row mb-3">
                 <div class="col">
-                    <input type="text" placeholder="Customer Number"  class="form-control">
+                    <input type="text" placeholder="Customer Number" id="cName"  value="{{ ucwords('Kyaw gyi') }}" class="form-control">
                 </div>
                 <div class="col">
-                    <input type="text" placeholder="Invoice Number" class="form-control">
+                    <input type="text" placeholder="Invoice Number" id="cIN" value="{{ strtoupper(uniqid()) }}" class="form-control">
                 </div>
                 <div class="col">
-                    <input type="text" placeholder="Date" class="form-control">
+                    <input type="date" placeholder="Date" id="cDate" value="{{ date('Y-m-d') }}" class="form-control">
                 </div>
             </div>
         </div>
@@ -37,11 +39,16 @@
             <div class="border rounded p-2">
                 <h4 class="d-flex justify-content-between align-items-center mb-2">
                     <span class="text-primary">Your Voucher</span>
-                    <span class="badge bg-primary rounded-pill">3</span>
+                    <span class="badge bg-primary rounded-pill" id="voucherListCount">0</span>
                 </h4>
                 <ul class="list-group" id="voucherList">
 
                 </ul>
+                <div class="d-flex justify-content-between text-primary mt-3">
+                    <h4>Total </h4>
+                    <h4 class="text-end" id="voucherTotal">123</h4>
+                </div>
+                <button class="btn btn-lg w-100 btn-primary" id="checkout">Check Out</button>
             </div>
         </div>
     </div>
@@ -54,7 +61,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="text-center">
+                <form class="text-center" id="modalForm" data-id="">
                     <p id="productModalTitle"></p>
                     <img src="" height="150" id="productModalImg" alt="">
                     <p class="text-black-50" >
