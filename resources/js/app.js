@@ -17,7 +17,7 @@ let quantityMinus = document.getElementById("quantityMinus");
 let addToVoucher = document.getElementById("addToVoucher");
 let voucherList = document.getElementById("voucherList");
 let storeVoucher = [];
-
+ 
 let checkout = document.getElementById("checkout");
 
 function voucherListCount(){
@@ -172,6 +172,7 @@ window.addEventListener('load',function (){
     voucherTotal()
 })
 
+// product remove from voucher list
 voucherList.addEventListener('click',function (e){
     // console.dir(e.target)
     if(e.target.classList.contains("vocuher-list-del")){
@@ -193,7 +194,7 @@ checkout.addEventListener('click',function (){
         voucher_list : storeVoucher
     }
 
-    console.log(data)
+    // console.log(data)
 
 
 
@@ -206,6 +207,8 @@ checkout.addEventListener('click',function (){
                 voucherListCount()
                 voucherTotal()
             }
+        }).catch(function(error){
+            console.log(error);
         })
 
 })

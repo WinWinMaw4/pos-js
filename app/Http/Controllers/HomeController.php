@@ -43,7 +43,7 @@ class HomeController extends Controller
             $voucherList->item_id = $list->item_id;
             $voucherList->quantity = $list->quantity;
             $voucherList->title = $item->name;
-            $voucherList->pirce = $item->price;
+            $voucherList->pirce =$item->price;
             $voucherList->cost = $list->quantity * $item->price;
             $voucherList->save();
         }
